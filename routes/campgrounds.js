@@ -107,7 +107,11 @@ router.get("/:id/edit", isLoggedIn, checkUserCampground, function(req, res){
 
 // PUT - updates campground in the database
 router.put("/:id", isSafe, function(req, res){
-  geocoder.geocode(req.body.location, function (data) {
+  geocoder.geocode(req.body.location, function (err, data) {
+    if (err || data.status === 'ZERO_RESULTS') {
+      req.flash('error', 'Invalid address');
+      return res.redirect('back');
+    }
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
     var location = data.results[0].formatted_address;

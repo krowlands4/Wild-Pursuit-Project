@@ -23,7 +23,7 @@
     
  
 // assign mongoose promise library and connect to database
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
  var url = process.env.DATABASEURL || 'mongodb://localhost:27017/yelp_camp_v10';
  mongoose.connect(url, { useNewUrlParser: true });
       // .then(() => console.log(`Database connected`))

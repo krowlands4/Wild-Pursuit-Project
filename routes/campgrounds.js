@@ -118,9 +118,11 @@ router.put("/:id", isSafe, function(req, res){
     var newData = {name: req.body.name, image: req.body.image, description: req.body.description, cost: req.body.cost, location: location, lat: lat, lng: lng};
     Campground.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, campground){
         if(err){
+            console.log(err);
             req.flash("error", err.message);
             res.redirect("back");
         } else {
+            console.log(data);
             req.flash("success","Successfully Updated!");
             res.redirect("/campgrounds/" + campground._id);
         }

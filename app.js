@@ -20,13 +20,13 @@
  var commentRoutes    = require("./routes/comments"),
      campgroundRoutes = require("./routes/campgrounds"),
      indexRoutes      = require("./routes/index");
-     // MONGODB_URI      = require("./.env");
  
 // assign mongoose promise library and connect to database
- // mongoose.Promise = global.Promise;
- mongoose.connect(process.env.MONGODB_URI,{ useMongoClient: true })|| 'mongodb://localhost:27017/yelp_camp_v10';
-      // .then(() => console.log(`Database connected`))
-      // .catch(err => console.log(`Database connection error: ${err.message}`));
+ mongoose.Promise = global.Promise;
+const databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/yelp_camp_v10';
+ mongoose.connect(databaseUri, { useMongoClient: true })
+      .then(() => console.log(`Database connected`))
+      .catch(err => console.log(`Database connection error: ${err.message}`));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));

@@ -108,7 +108,9 @@ router.get("/:id/edit", isLoggedIn, checkUserCampground, function(req, res){
 // PUT - updates campground in the database
 router.put("/:id", isSafe, function(req, res){
   geocoder.geocode(req.body.location, function (err, data) {
+      console.log(data);
     if (err || data.status === 'ZERO_RESULTS') {
+        console.log(err);
       req.flash('error', 'Invalid address');
       return res.redirect('back');
     }
@@ -118,11 +120,9 @@ router.put("/:id", isSafe, function(req, res){
     var newData = {name: req.body.name, image: req.body.image, description: req.body.description, cost: req.body.cost, location: location, lat: lat, lng: lng};
     Campground.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, campground){
         if(err){
-            console.log(err);
             req.flash("error", err.message);
             res.redirect("back");
         } else {
-            console.log(data);
             req.flash("success","Successfully Updated!");
             res.redirect("/campgrounds/" + campground._id);
         }

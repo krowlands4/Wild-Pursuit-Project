@@ -23,8 +23,8 @@
  
 // assign mongoose promise library and connect to database
  mongoose.Promise = global.Promise;
-const databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/yelp_camp_v10';
- mongoose.connect(databaseUri, { useMongoClient: true })
+const databaseUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/yelp_camp_v10';
+ mongoose.connect(databaseUri, { useNewUrlParser: true })
       .then(() => console.log(`Database connected`))
       .catch(err => console.log(`Database connection error: ${err.message}`));
 app.use(bodyParser.urlencoded({extended: true}));

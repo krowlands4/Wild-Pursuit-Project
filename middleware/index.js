@@ -50,7 +50,7 @@ module.exports = {
     if(req.body.image.match(/^https:\/\/images\.unsplash\.com\/.*/)) {
       next();
     }else {
-      req.flash('error', 'Only images from unsplash.com');
+      req.flash('error', 'Only images from unsplash.com\nSee https://youtu.be/Bn3weNRQRDE for how to copy image urls from unsplash.');
       res.redirect('back');
     }
   }
